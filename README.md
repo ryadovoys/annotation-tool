@@ -3,7 +3,7 @@
 <p align="center"><b>Point at anything on a page and tell your agent exactly what you mean.</b></p>
 
 <p align="center">
-  <img src="assets/annotation-tool.png" width="720" alt="A card on a web page highlighted in lemon yellow, with its name in a label above it and a bar of keyboard hints at the bottom">
+  <img src="assets/annotation-tool.gif" width="720" alt="Picking two cards on a pricing page with a lemon yellow highlight, pasting both numbered references into one sentence for an agent, and the agent updating the page">
 </p>
 
 I work on interfaces with coding agents every day. The slow part is explaining which thing I mean. "The button in the second card, no, the other one." So I built this layer for a project at work, and then kept missing it everywhere else.
