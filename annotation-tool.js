@@ -660,21 +660,27 @@
     return `${relativeTo(page, file)}${place.line ? `:${place.line}` : ""}`;
   }
 
-  function selectorPart(node) {
+  function selectorPart(node, exact) {
     if (node.id) return `#${CSS.escape(node.id)}`;
     const tag = node.tagName.toLowerCase();
     const classes = Array.from(node.classList).slice(0, 2).map((name) => `.${CSS.escape(name)}`);
-    return tag + classes.join("");
+    const twins = Array.from(node.parentElement?.children ?? []).filter((n) => n.tagName === node.tagName);
+    const position = exact && twins.length > 1 ? `:nth-of-type(${twins.indexOf(node) + 1})` : "";
+    return tag + classes.join("") + position;
   }
 
-  /** The shortest path from the element up that points at it and nothing else. */
-  function selectorOf(element) {
-    let selector = selectorPart(element);
+  /**
+   * The shortest path from the element up that points at it and nothing else.
+   * Positions are added only when names alone match several elements.
+   */
+  function selectorOf(element, exact = false) {
+    let selector = selectorPart(element, exact);
     for (let node = element.parentElement; node && node !== document.body; node = node.parentElement) {
       if (document.querySelectorAll(selector).length === 1) return selector;
-      selector = `${selectorPart(node)} > ${selector}`;
+      selector = `${selectorPart(node, exact)} > ${selector}`;
     }
-    return selector;
+    if (document.querySelectorAll(selector).length === 1 || exact) return selector;
+    return selectorOf(element, true);
   }
 
   function styleOf(element) {
