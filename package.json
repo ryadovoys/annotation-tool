@@ -1,0 +1,24 @@
+{
+  "name": "annotation-tool",
+  "version": "1.0.0",
+  "description": "Point at anything in a web page and copy a short numbered reference for your coding agent.",
+  "license": "MIT",
+  "type": "module",
+  "repository": "github:ryadovoys/annotation-tool",
+  "exports": {
+    ".": "./annotation-tool.js",
+    "./vite": "./vite.js"
+  },
+  "files": [
+    "annotation-tool.js",
+    "vite.js"
+  ],
+  "peerDependencies": {
+    "vite": "*"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  }
+}
